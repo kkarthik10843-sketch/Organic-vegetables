@@ -1,4 +1,4 @@
-function Header({ currentRoute }) {
+function Header({ currentRoute, cartCount = 0 }) {
     try {
         const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
@@ -38,7 +38,7 @@ function Header({ currentRoute }) {
                         <div className="hidden md:flex items-center gap-4">
                             <a href="#cart" className="relative p-2 text-slate-600 hover:text-[var(--primary)] transition-colors">
                                 <div className="icon-shopping-cart text-xl"></div>
-                                <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-[10px] font-bold flex items-center justify-center rounded-full">0</span>
+                                <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-[10px] font-bold flex items-center justify-center rounded-full">{cartCount}</span>
                             </a>
                             <a href="#login" className="text-slate-600 hover:text-[var(--primary)] font-medium text-sm transition-colors">Login</a>
                             <a href="#register" className="btn-primary py-2 px-4 text-sm">Join Now</a>
@@ -68,6 +68,7 @@ function Header({ currentRoute }) {
                                     {link.label}
                                 </a>
                             ))}
+                            <a href="#cart" onClick={() => setIsMobileMenuOpen(false)} className="text-base font-medium text-slate-600">Cart ({cartCount})</a>
                             <div className="pt-4 border-t border-slate-100 flex flex-col gap-3">
                                 <a href="#login" onClick={() => setIsMobileMenuOpen(false)} className="btn-secondary w-full">Login</a>
                                 <a href="#register" onClick={() => setIsMobileMenuOpen(false)} className="btn-primary w-full">Join Now</a>
