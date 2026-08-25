@@ -1,0 +1,10 @@
+function Register() {
+    const [role, setRole] = React.useState('buyer');
+    const [submitted, setSubmitted] = React.useState(false);
+    const fields = role === 'farmer' ? ['Name', 'Phone', 'Email', 'Farm location', 'Farm name', 'Produce category', 'Password', 'Confirm password'] : ['Name', 'Phone', 'Email', 'Location', 'Password', 'Confirm password'];
+    return <div className="page-shell max-w-3xl" data-name="register-page"><div className="card p-8 md:p-10"><p className="section-kicker">Join the movement</p><h1 className="text-3xl mb-2">Create your AgriDirect account</h1><p className="text-slate-500 mb-7">Choose how you want to participate in a fairer food system.</p>
+        <div className="grid grid-cols-2 gap-3 mb-8"><button type="button" onClick={() => setRole('buyer')} className={`p-4 rounded-lg border text-left ${role === 'buyer' ? 'border-green-500 bg-green-50' : 'border-slate-200'}`}><div className="icon-shopping-basket text-xl text-[var(--primary)] mb-2"></div><b>Buyer</b><span className="block text-xs text-slate-500 mt-1">Shop farm-fresh produce</span></button><button type="button" onClick={() => setRole('farmer')} className={`p-4 rounded-lg border text-left ${role === 'farmer' ? 'border-green-500 bg-green-50' : 'border-slate-200'}`}><div className="icon-tractor text-xl text-[var(--primary)] mb-2"></div><b>Farmer</b><span className="block text-xs text-slate-500 mt-1">Sell directly to buyers</span></button></div>
+        {submitted && <div className="bg-green-50 text-green-700 rounded-lg p-3 mb-5 text-sm">Account created in demo mode. You can now explore AgriDirect.</div>}
+        <form className="grid md:grid-cols-2 gap-4" onSubmit={event => { event.preventDefault(); setSubmitted(true); }}><>{fields.map(field => <label key={field} className="block text-sm font-semibold">{field}<input required type={field.toLowerCase().includes('password') ? 'password' : field === 'Email' ? 'email' : 'text'} className="input-control mt-2" /></label>)}</><button className="btn-primary md:col-span-2 mt-3">Create {role === 'farmer' ? 'Farmer' : 'Buyer'} Account</button></form>
+    </div></div>;
+}
