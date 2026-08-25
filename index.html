@@ -12,6 +12,9 @@
     <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/font/lucide.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
     <style type="text/tailwindcss">
     @layer theme {
@@ -28,10 +31,13 @@
 
     @layer base {
         body {
-            @apply bg-[var(--background)] text-[var(--text-main)] font-sans antialiased;
+            @apply bg-[var(--background)] text-[var(--text-main)] antialiased;
+            font-family: 'DM Sans', sans-serif;
+            background-image: radial-gradient(circle at 85% 0%, rgba(22, 163, 74, 0.08), transparent 28rem);
         }
         h1, h2, h3, h4, h5, h6 {
             @apply font-bold tracking-tight;
+            font-family: 'Space Grotesk', sans-serif;
         }
     }
 
@@ -51,6 +57,9 @@
         .glass-nav {
             @apply bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50;
         }
+        .section-kicker { @apply text-xs uppercase tracking-[0.2em] font-bold text-[var(--primary)] mb-3; }
+        .input-control { @apply w-full border border-slate-200 rounded-lg px-4 py-3 bg-white outline-none focus:ring-2 focus:ring-green-200 focus:border-[var(--primary)] transition; }
+        .page-shell { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12; }
     }
     </style>
 </head>
@@ -67,6 +76,11 @@
     <script type="text/babel" src="pages/OrderDetails.js"></script>
     <script type="text/babel" src="pages/BuyerOrders.js"></script>
     <script type="text/babel" src="pages/FarmerOrders.js"></script>
+    <script type="text/babel" src="pages/Login.js"></script>
+    <script type="text/babel" src="pages/Register.js"></script>
+    <script type="text/babel" src="pages/SellProduce.js"></script>
+    <script type="text/babel" src="pages/MarketPrices.js"></script>
+    <script type="text/babel" src="pages/AITools.js"></script>
     <script type="text/babel" src="app.js"></script>
 </body>
 </html>
