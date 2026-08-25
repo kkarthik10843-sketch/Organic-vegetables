@@ -21,7 +21,7 @@ function Hero() {
                                     <div className="icon-shopping-bag"></div>
                                     Shop Fresh Products
                                 </a>
-                                <a href="#register-farmer" className="btn-secondary text-lg px-8 py-4">
+                                <a href="#sell" className="btn-secondary text-lg px-8 py-4">
                                     <div className="icon-tractor"></div>
                                     Sell Your Produce
                                 </a>
