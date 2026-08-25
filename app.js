@@ -1,3 +1,17 @@
+const AGRI_PRODUCTS = [
+  { id: 1, name: 'Vine-ripened Tomatoes', category: 'Vegetables', price: 48, unit: 'kg', farmer: 'Ramesh Kumar', location: 'Coimbatore, Tamil Nadu', quantity: '100 kg', freshness: 'Harvested today', rating: 4.8, image: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800&q=85' },
+  { id: 2, name: 'Nashik Red Onions', category: 'Vegetables', price: 36, unit: 'kg', farmer: 'Suresh Singh', location: 'Nashik, Maharashtra', quantity: '500 kg', freshness: 'Harvested yesterday', rating: 4.6, image: 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800&q=85' },
+  { id: 3, name: 'Himalayan Potatoes', category: 'Vegetables', price: 42, unit: 'kg', farmer: 'Amit Patel', location: 'Agra, Uttar Pradesh', quantity: '300 kg', freshness: 'Harvested 2 days ago', rating: 4.7, image: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=800&q=85' },
+  { id: 4, name: 'Organic Alphonso Mangoes', category: 'Fruits', price: 180, unit: 'kg', farmer: 'Meera Farms', location: 'Ratnagiri, Maharashtra', quantity: '80 kg', freshness: 'Harvested today', rating: 4.9, image: 'https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=800&q=85' },
+  { id: 5, name: 'Basmati Rice', category: 'Grains', price: 95, unit: 'kg', farmer: 'Punjab Collective', location: 'Amritsar, Punjab', quantity: '1,200 kg', freshness: 'Milled this week', rating: 4.8, image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=800&q=85' },
+  { id: 6, name: 'Cold-pressed Mustard Oil', category: 'Organic Products', price: 220, unit: 'litre', farmer: 'Ananya Organics', location: 'Jaipur, Rajasthan', quantity: '60 litres', freshness: 'Pressed 3 days ago', rating: 4.7, image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=800&q=85' },
+];
+
+window.AgriDirect = { products: AGRI_PRODUCTS, cart: [], listeners: [] };
+window.AgriDirect.addToCart = (product) => { const existing = window.AgriDirect.cart.find(item => item.id === product.id); if (existing) existing.quantity += 1; else window.AgriDirect.cart.push({ ...product, quantity: 1 }); window.AgriDirect.listeners.forEach(listener => listener()); };
+window.AgriDirect.updateCart = (id, delta) => { const item = window.AgriDirect.cart.find(product => product.id === id); if (!item) return; item.quantity += delta; if (item.quantity < 1) window.AgriDirect.cart = window.AgriDirect.cart.filter(product => product.id !== id); window.AgriDirect.listeners.forEach(listener => listener()); };
+window.AgriDirect.removeFromCart = (id) => { window.AgriDirect.cart = window.AgriDirect.cart.filter(product => product.id !== id); window.AgriDirect.listeners.forEach(listener => listener()); };
+
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -37,12 +51,14 @@ class ErrorBoundary extends React.Component {
 function App() {
   try {
     const [currentRoute, setCurrentRoute] = React.useState(window.location.hash || '#home');
+    const [, refresh] = React.useState(0);
 
     React.useEffect(() => {
       const handleHashChange = () => {
         setCurrentRoute(window.location.hash || '#home');
       };
       window.addEventListener('hashchange', handleHashChange);
+      window.AgriDirect.listeners.push(() => refresh(value => value + 1));
       return () => window.removeEventListener('hashchange', handleHashChange);
     }, []);
 
@@ -69,7 +85,12 @@ function App() {
           return <BuyerOrders />;
         case '#farmer/orders':
           return <FarmerOrders />;
-        // Additional routes like products, login, dashboard will be added here
+        case '#login': return <Login />;
+        case '#register':
+        case '#register-farmer': return <Register />;
+        case '#sell': return <SellProduce />;
+        case '#market-prices': return <MarketPrices />;
+        case '#ai-tools': return <AITools />;
         default:
           return <Home />;
       }
@@ -77,7 +98,7 @@ function App() {
 
     return (
       <div className="flex flex-col min-h-screen" data-name="app" data-file="app.js">
-        <Header currentRoute={currentRoute} />
+        <Header currentRoute={currentRoute} cartCount={window.AgriDirect.cart.reduce((total, item) => total + item.quantity, 0)} />
         <main className="flex-grow">
             {renderRoute()}
         </main>
