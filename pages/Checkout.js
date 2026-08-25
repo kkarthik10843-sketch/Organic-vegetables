@@ -1,6 +1,7 @@
 function Checkout() {
     try {
         const [isSuccess, setIsSuccess] = React.useState(false);
+        const cartTotal = window.AgriDirect.cart.reduce((total, item) => total + item.price * item.quantity, 0) + (window.AgriDirect.cart.length ? 30 : 0);
 
         const handlePayment = (e) => {
             e.preventDefault();
@@ -81,12 +82,12 @@ function Checkout() {
                             <div className="border-t border-slate-200 pt-4 mb-6">
                                 <div className="flex justify-between font-bold text-xl">
                                     <span>Amount to Pay</span>
-                                    <span className="text-[var(--primary)]">₹195</span>
+                                    <span className="text-[var(--primary)]">₹{cartTotal}</span>
                                 </div>
                             </div>
                             
                             <button onClick={handlePayment} className="w-full btn-primary text-lg">
-                                Pay ₹195
+                                Pay ₹{cartTotal}
                             </button>
                         </div>
                     </div>
