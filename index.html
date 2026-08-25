@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriDirect - From Farm Directly to You</title>
+    <meta name="description" content="Empowering Farmers. Reducing Intermediaries. Delivering Fresh. Connect directly with farmers and buy fresh agricultural products.">
+    <meta name="keywords" content="agriculture, farm, fresh vegetables, direct to consumer, farmers market">
+    
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/font/lucide.css" rel="stylesheet">
+
+    <style type="text/tailwindcss">
+    @layer theme {
+        :root {
+            --primary: #16a34a; /* green-600 */
+            --primary-hover: #15803d; /* green-700 */
+            --secondary: #eab308; /* yellow-500 */
+            --background: #f8fafc; /* slate-50 */
+            --surface: #ffffff;
+            --text-main: #0f172a; /* slate-900 */
+            --text-muted: #64748b; /* slate-500 */
+        }
+    }
+
+    @layer base {
+        body {
+            @apply bg-[var(--background)] text-[var(--text-main)] font-sans antialiased;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            @apply font-bold tracking-tight;
+        }
+    }
+
+    @layer components {
+        .btn-primary {
+            @apply bg-[var(--primary)] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[var(--primary-hover)] transition-colors shadow-sm inline-flex items-center justify-center gap-2;
+        }
+        .btn-secondary {
+            @apply bg-white text-[var(--primary)] border-2 border-[var(--primary)] px-6 py-3 rounded-lg font-semibold hover:bg-green-50 transition-colors shadow-sm inline-flex items-center justify-center gap-2;
+        }
+        .card {
+            @apply bg-[var(--surface)] rounded-xl shadow-sm border border-slate-200 overflow-hidden;
+        }
+    }
+
+    @layer utilities {
+        .glass-nav {
+            @apply bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel" src="components/Header.js"></script>
+    <script type="text/babel" src="components/Hero.js"></script>
+    <script type="text/babel" src="components/ProductImage.js"></script>
+    <script type="text/babel" src="pages/Home.js"></script>
+    <script type="text/babel" src="pages/ProductDetails.js"></script>
+    <script type="text/babel" src="pages/Products.js"></script>
+    <script type="text/babel" src="pages/Cart.js"></script>
+    <script type="text/babel" src="pages/Checkout.js"></script>
+    <script type="text/babel" src="pages/OrderDetails.js"></script>
+    <script type="text/babel" src="pages/BuyerOrders.js"></script>
+    <script type="text/babel" src="pages/FarmerOrders.js"></script>
+    <script type="text/babel" src="app.js"></script>
+</body>
+</html>
